@@ -1,6 +1,3 @@
-# classify_document.py
-from document_ingest import DocumentIngestor
-
 # llm_client.py
 import os
 
@@ -13,7 +10,7 @@ from prompts import CLASSIFY_PROMPT_TEMPLATE
 load_dotenv()
 
 
-class DocumentClassifier:
+class LLMClient:
     def __init__(self):
         self.llm = AzureChatOpenAI(
             azure_deployment=os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME"),
@@ -26,13 +23,3 @@ class DocumentClassifier:
         structured_llm = self.llm.with_structured_output(DocumentClassification)
         result = structured_llm.invoke(prompt)
         return result
-
-
-if __name__ == "__main__":
-    ingestor = DocumentIngestor("data/Contract.pdf")
-    doc_text = ingestor.get_full_text()
-
-    doc_classifier = DocumentClassifier()
-    classification = doc_classifier.classify_document(doc_text)
-    print("Classification Result:")
-    print(classification)
