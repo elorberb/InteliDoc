@@ -7,3 +7,4 @@ pytest         # for testing
 pytest-asyncio # for async FastAPI/API tests
 langchain
 langchain-openai
+python-dotenv
