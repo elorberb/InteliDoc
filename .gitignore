@@ -1,0 +1,7 @@
+# env and venv files
+.env
+.venv
+
+
+# data
+data/
