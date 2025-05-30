@@ -2,9 +2,9 @@ import os
 
 from langchain_openai import AzureChatOpenAI
 
-from models.contract import ContractMetadata
-from models.earnings_report import EarningsReportMetadata
-from models.invoice import InvoiceMetadata
+from models.metadata_models.contract import ContractMetadata
+from models.metadata_models.earnings_report import EarningsReportMetadata
+from models.metadata_models.invoice import InvoiceMetadata
 from prompts import INVOICE_PROMPT, CONTRACT_PROMPT, EARNINGS_REPORT_PROMPT
 
 

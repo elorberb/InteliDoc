@@ -1,9 +1,9 @@
 from typing import Optional, Dict
 
-from pydantic import BaseModel
+from models.metadata_models.base_metadata import BaseMetadata
 
 
-class EarningsReportMetadata(BaseModel):
+class EarningsReportMetadata(BaseMetadata):
     reporting_period: Optional[str]
     key_metrics: Dict[str, float]
     executive_summary: Optional[str]
