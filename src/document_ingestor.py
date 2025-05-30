@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import List
 
 import pdfplumber
 
@@ -14,14 +14,6 @@ class DocumentIngestor:
             for page in pdf.pages:
                 pages_text.append(page.extract_text() or "")
         return pages_text
-
-    def extract_relevant_info(self, keywords: List[str]) -> Dict[str, List[str]]:
-        relevant = {kw: [] for kw in keywords}
-        for page_num, page_text in enumerate(self.text):
-            for kw in keywords:
-                if kw.lower() in page_text.lower():
-                    relevant[kw].append(f"Page {page_num + 1}: {page_text}")
-        return relevant
 
     def get_full_text(self) -> str:
         """Returns the full document text, organized by page, as a single string."""

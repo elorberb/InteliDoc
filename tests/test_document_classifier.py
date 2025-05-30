@@ -5,14 +5,14 @@ import pytest
 from sklearn.metrics import accuracy_score, precision_score, recall_score
 
 from document_classifier import DocumentClassifier
-from document_ingest import DocumentIngestor
+from document_ingestor import DocumentIngestor
 
 # Map test files to their expected types
 expected_types = {
     "invoice1.pdf": "invoice",
     "invoice2.pdf": "invoice",
     "contract.pdf": "contract",
-    "earnings.pdf": "report",
+    "earnings.pdf": "earnings_report",
     "Home exercise.pdf": "unknown",
 }
 

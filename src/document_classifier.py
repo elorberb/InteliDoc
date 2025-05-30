@@ -5,7 +5,7 @@ import openai
 from dotenv import load_dotenv
 from langchain_openai import AzureChatOpenAI
 
-from document_ingest import DocumentIngestor
+from document_ingestor import DocumentIngestor
 from models.document_classification import DocumentClassification
 from prompts import CLASSIFY_PROMPT_TEMPLATE
 
