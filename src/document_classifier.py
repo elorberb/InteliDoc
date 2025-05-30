@@ -1,12 +1,11 @@
-# classify_document.py
-from document_ingest import DocumentIngestor
-
-# llm_client.py
 import os
+import time
 
+import openai
 from dotenv import load_dotenv
 from langchain_openai import AzureChatOpenAI
 
+from document_ingest import DocumentIngestor
 from models.document_classification import DocumentClassification
 from prompts import CLASSIFY_PROMPT_TEMPLATE
 
@@ -21,11 +20,32 @@ class DocumentClassifier:
             temperature=0,
         )
 
+    @staticmethod
+    def _with_retries(func, *args, max_retries=5, base_delay=5, **kwargs):
+        for attempt in range(max_retries):
+            try:
+                return func(*args, **kwargs)
+            except openai.RateLimitError:
+                wait_time = base_delay * (2 ** attempt)
+                print(f"Rate limit hit. Retrying in {wait_time} seconds... (Attempt {attempt + 1}/{max_retries})")
+                time.sleep(wait_time)
+        raise RuntimeError("Exceeded maximum retries due to rate limiting.")
+
     def classify_document(self, doc_text: str) -> DocumentClassification:
-        prompt = CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc_text)
-        structured_llm = self.llm.with_structured_output(DocumentClassification)
-        result = structured_llm.invoke(prompt)
-        return result
+        def _classify(doc_text):
+            prompt = CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc_text)
+            classifier_llm = self.llm.with_structured_output(DocumentClassification)
+            return classifier_llm.invoke(prompt)
+
+        return self._with_retries(_classify, doc_text)
+
+    def classify_documents(self, doc_texts: list[str]) -> list:
+        def _classify_batch(doc_texts):
+            classifier_llm = self.llm.with_structured_output(DocumentClassification)
+            prompts = [CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc) for doc in doc_texts]
+            return list(classifier_llm.batch(prompts))
+
+        return self._with_retries(_classify_batch, doc_texts)
 
 
 if __name__ == "__main__":

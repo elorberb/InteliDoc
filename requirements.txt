@@ -5,6 +5,7 @@ pdfplumber
 openai
 pytest         # for testing
 pytest-asyncio # for async FastAPI/API tests
+scikit-learn # for evaluation metrics
 langchain
 langchain-openai
 python-dotenv
