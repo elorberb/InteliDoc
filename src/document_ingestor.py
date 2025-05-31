@@ -1,6 +1,10 @@
+import logging
 from typing import List
 
 import pdfplumber
+
+# Silence pdfminer warnings
+logging.getLogger("pdfminer").setLevel(logging.ERROR)
 
 
 class DocumentIngestor:
