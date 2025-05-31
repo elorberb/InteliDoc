@@ -9,3 +9,4 @@ scikit-learn # for evaluation metrics
 langchain
 langchain-openai
 python-dotenv
+python-multipart
