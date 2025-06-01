@@ -9,8 +9,7 @@ from metadata_extractor import MetadataExtractor
 from models.analyze_response import AnalyzeResponse
 from models.document_classification import DocumentClassification
 
-app = FastAPI(title="Document Intelligence API")
-
+app = FastAPI(title="📑 InteliDoc: Document Intelligence API")
 # In-memory storage
 DOCUMENT_STORE: Dict[str, dict] = {}
 
