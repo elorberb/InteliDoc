@@ -36,8 +36,11 @@ def run_pipeline(document_path: str) -> dict:
         "metadata": metadata.model_dump()
     }
 
-    # Save to file
-    output_filename = f"output/{filename.split('.')[0]}.json"
+    # Save to file in output subfolder matching input folder
+    input_subfolder = Path(document_path).parent.name
+    output_dir = Path("output") / input_subfolder
+    output_dir.mkdir(parents=True, exist_ok=True)
+    output_filename = output_dir / f"{filename.split('.')[0]}.json"
     with open(output_filename, 'w') as f:
         import json
         json.dump(result, f, indent=2)
