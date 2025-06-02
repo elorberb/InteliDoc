@@ -1,5 +1,5 @@
 {
-  "document_id": "726af7ac-d73d-477f-b53b-3d639d728ece",
+  "document_id": "c0762206-2c9e-44e3-9fa5-1fd8ef824dff",
   "filename": "invoice2.pdf",
   "classification": {
     "type": "invoice",
@@ -8,16 +8,16 @@
   "metadata": {
     "vendor": "Hotel Amarin",
     "amount": 9390.26,
-    "due_date": "2021-09-03",
+    "due_date": "03.09.2021",
     "line_items": [
       {
-        "description": "Daily rental price & full board-premium",
+        "description": "t\u00e4glicher Mietpreis & Vollpension-premium",
         "qty": 2,
         "unit_price": 4624.63,
         "total": 9249.26
       },
       {
-        "description": "Welcome bar Hotel Amarin",
+        "description": "Welcome bar hotel Amarin",
         "qty": 1,
         "unit_price": 90.0,
         "total": 90.0

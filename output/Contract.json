@@ -1,5 +1,5 @@
 {
-  "document_id": "70867538-8410-4b5b-a82f-aeaea8f6b7e5",
+  "document_id": "e1c05c3d-45b0-401b-8f7f-39f3b81935ff",
   "filename": "Contract.pdf",
   "classification": {
     "type": "contract",
@@ -13,11 +13,11 @@
     "effective_date": "2019-01-10",
     "termination_date": "2021-01-10",
     "key_terms": [
-      "Payment of an annual fee of $240,000 plus applicable taxes to the Contractor.",
-      "Confidentiality obligations for a period of five years post-termination.",
-      "Termination rights for both parties with specified notice periods.",
-      "Governing law is British Columbia, Canada.",
-      "Independent contractor relationship, not employment."
+      "Payment terms: Annual fee of $240,000 plus GST and applicable taxes.",
+      "Confidentiality: Contractor must maintain confidentiality for five years post-agreement.",
+      "Termination: Agreement can be terminated by either party with 30 days' notice.",
+      "Governing Law: Agreement governed by the laws of British Columbia, Canada.",
+      "Independent Contractor: Relationship is not an employment relationship."
     ]
   }
 }
