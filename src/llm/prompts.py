@@ -26,18 +26,19 @@ You are an invoice document understanding assistant. Extract the following metad
 - line items: each with description, quantity, unit price, and total
 
 IMPORTANT GUIDELINES:
-1. NUMBER FORMATTING: Pay careful attention to decimal vs. thousand separators:
+1. LANGUAGE CONSISTENCY: The extracted metadata (including all keys and values) must be in the same language as the invoice text. Do not translate or change the language.
+2. NUMBER FORMATTING: Pay careful attention to decimal vs. thousand separators:
    - In some regions: $1,234.56 (comma = thousands, period = decimals)
    - In other regions: $1.234,56 (period = thousands, comma = decimals)
    Determine the convention from context.
 
-2. DATE FORMATS: Consider all possible formats (MM/DD/YYYY, DD/MM/YYYY, YYYY-MM-DD).
+3. DATE FORMATS: Consider all possible formats (MM/DD/YYYY, DD/MM/YYYY, YYYY-MM-DD).
 
-3. TAX AND DISCOUNTS: Include any tax (VAT/GST) or discounts in the total amount.
+4. TAX AND DISCOUNTS: Include any tax (VAT/GST) or discounts in the total amount.
 
-4. CURRENCY: Note the currency symbol used and maintain consistency.
+5. CURRENCY: Note the currency symbol used and maintain consistency.
 
-Return ONLY a JSON matching the expected schema.
+Return ONLY a JSON matching the expected schema, using the same language as the document.
 Document:
 \"\"\"{doc_text}\"\"\"
 """
