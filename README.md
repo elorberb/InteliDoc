@@ -133,7 +133,7 @@ LLM providers like OpenAI enforce rate limits on API usage. If too many requests
 
 **Solution:**
 
-- Implement **exponential backoff with retries**, already built into the `retryable_llm()` wrapper. This progressively increases the wait time between retries.
+- Implement **exponential backoff with retries**, already built into the `with_retries()` in the `llm_utils.py` module. This progressively increases the wait time between retries.
 - Provision multiple GPT-4o deployments (e.g., `gpt4o-east`, `gpt4o-west`) and cycle through them using a **round-robin mechanism** to balance load and avoid throttling on a single endpoint.
 
 ---
