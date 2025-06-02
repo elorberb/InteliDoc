@@ -64,13 +64,13 @@ The system is designed with separation of concerns across the following componen
 Handles PDF parsing using pdfplumber. Extracts clean, page-by-page text and returns a structured string ready for LLM processing.
 
 - `DocumentClassifier`
-Uses Azure-hosted GPT-4o through LangChain with structured output. It classifies documents into one of four types (invoice, contract, earnings_report, unknown).
+Classifies documents into one of four types (invoice, contract, earnings_report, unknown).
 
 - `MetadataExtractor`
 Based on the classified document type, it selects the correct schema and prompt to extract structured metadata. Uses Pydantic models for type safety and consistency.
 
 ### 🧠 LLM Strategy
-- **Model:** GPT-4o from Azure OpenAI with support for structured outputs and large context windows.
+- **Model:** GPT-4o from Azure OpenAI with support for structured outputs.
 
 - **Structured Outputs:** Output is parsed directly into Pydantic models to enforce schema integrity.
 
