@@ -1,7 +1,3 @@
-import os
-
-from langchain_openai import AzureChatOpenAI
-
 from llm_utils import with_retries, get_azure_chat_openai_llm
 from models.metadata_models.contract import ContractMetadata
 from models.metadata_models.earnings_report import EarningsReportMetadata
@@ -35,22 +31,3 @@ class MetadataExtractor:
         except Exception as e:
             print(f"Extraction failed: {e}")
             return {}
-
-
-if __name__ == '__main__':
-    from document_ingestor import DocumentIngestor
-    from document_classifier import DocumentClassifier
-    from metadata_extractor import MetadataExtractor
-
-    file_path = "data/scanned_pdfs/scanned_contract1.pdf"
-    ingestor = DocumentIngestor(file_path)
-    doc_text = ingestor.get_full_text()
-
-    classifier = DocumentClassifier()
-    doc_type = classifier.classify_document(doc_text).type.value
-
-    extractor = MetadataExtractor()
-    metadata = extractor.extract(doc_type, doc_text)
-
-    print("Extracted Metadata:")
-    metadata.pretty_print()

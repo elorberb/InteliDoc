@@ -1,9 +1,6 @@
-import os
-
 from dotenv import load_dotenv
-from llm_utils import get_azure_chat_openai_llm, with_retries
 
-from document_ingestor import DocumentIngestor
+from llm_utils import get_azure_chat_openai_llm, with_retries
 from models.document_classification import DocumentClassification
 from prompts import CLASSIFY_PROMPT_TEMPLATE
 
@@ -32,13 +29,3 @@ class DocumentClassifier:
             return list(classifier_llm.batch(prompts))
 
         return with_retries(_classify_batch, doc_texts)
-
-
-if __name__ == "__main__":
-    ingestor = DocumentIngestor("data/canva_invoices/invoice5.pdf")
-    doc_text = ingestor.get_full_text()
-
-    doc_classifier = DocumentClassifier()
-    classification = doc_classifier.classify_document(doc_text)
-    print("Classification Result:")
-    print(classification)
