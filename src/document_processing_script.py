@@ -9,7 +9,8 @@ from metadata_extractor import MetadataExtractor
 from models.analyze_response import AnalyzeResponse
 
 
-def run_pipeline(document_path):
+def run_pipeline(document_path: str) -> dict:
+    """ Run the document processing pipeline script."""
     # Create output directory if it doesn't exist
     Path("output").mkdir(exist_ok=True)
 

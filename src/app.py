@@ -1,5 +1,5 @@
 import uuid
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 
@@ -9,7 +9,7 @@ from llm_utils import get_azure_chat_openai_llm
 from metadata_extractor import MetadataExtractor
 from models.analyze_response import AnalyzeResponse
 
-app = FastAPI(title="📑 InteliDoc: Document Intelligence API")
+app = FastAPI(title="📑 InteliDoc: Intelligence Document API")
 # In-memory storage
 DOCUMENT_STORE: Dict[str, dict] = {}
 
@@ -20,6 +20,15 @@ extractor = MetadataExtractor(llm)
 
 
 def _get_field_descriptions(doc_type: str) -> Dict[str, str]:
+    """
+    Return a dictionary mapping field names to their descriptions for a given document type.
+
+    Args:
+        doc_type (str): The type of the document (e.g., 'invoice', 'contract', 'earnings_report').
+
+    Returns:
+        Dict[str, str]: A dictionary of field descriptions.
+    """
     if doc_type == "invoice":
         return {
             "vendor": "The name of the invoice issuer.",
@@ -44,7 +53,19 @@ def _get_field_descriptions(doc_type: str) -> Dict[str, str]:
 
 
 @app.post("/documents/analyze", response_model=AnalyzeResponse)
-async def analyze_document(file: UploadFile = File(...)):
+async def analyze_document(file: UploadFile = File(...)) -> AnalyzeResponse:
+    """
+    Analyze an uploaded document: ingest, classify, extract metadata, and store results.
+
+    Args:
+        file (UploadFile): The uploaded PDF file.
+
+    Returns:
+        AnalyzeResponse: The analysis result including document ID, filename, classification, and metadata.
+
+    Raises:
+        HTTPException: If any error occurs during processing.
+    """
     try:
         contents = await file.read()
         doc_id = str(uuid.uuid4())
@@ -80,7 +101,19 @@ async def analyze_document(file: UploadFile = File(...)):
 
 
 @app.get("/documents/{doc_id}")
-def get_document(doc_id: str):
+def get_document(doc_id: str) -> Dict[str, Any]:
+    """
+    Retrieve a document's analysis results by its ID.
+
+    Args:
+        doc_id (str): The unique document identifier.
+
+    Returns:
+        Dict[str, Any]: The document's filename, classification, metadata, and field descriptions.
+
+    Raises:
+        HTTPException: If the document is not found.
+    """
     doc = DOCUMENT_STORE.get(doc_id)
     if not doc:
         raise HTTPException(status_code=404, detail="Document not found")
@@ -100,7 +133,23 @@ def get_document(doc_id: str):
 def get_actions(doc_id: str,
                 status: Optional[str] = Query(None),
                 deadline: Optional[str] = Query(None),
-                priority: Optional[str] = Query(None)):
+                priority: Optional[str] = Query(None)
+                ) -> list[Dict[str, str]]:
+    """
+    Retrieve possible actions for a document, optionally filtered by status, deadline, or priority.
+
+    Args:
+        doc_id (str): The unique document identifier.
+        status (Optional[str]): Filter by action status.
+        deadline (Optional[str]): Filter by action deadline.
+        priority (Optional[str]): Filter by action priority.
+
+    Returns:
+        list[Dict[str, str]]: A list of action dictionaries.
+
+    Raises:
+        HTTPException: If the document is not found.
+    """
     if doc_id not in DOCUMENT_STORE:
         raise HTTPException(status_code=404, detail="Document not found")
 
