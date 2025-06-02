@@ -2,7 +2,7 @@ from typing import List
 
 from dotenv import load_dotenv
 
-from llm_utils import get_azure_chat_openai_llm, with_retries
+from llm_utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.document_classification import DocumentClassification
 from prompts import CLASSIFY_PROMPT_TEMPLATE
 
@@ -22,6 +22,7 @@ class DocumentClassifier:
         else:
             self.llm = llm
 
+    @retry_on_rate_limit()
     def classify_document(self, doc_text: str) -> DocumentClassification:
         """
         Classify a single document's text and return its classification.
@@ -33,13 +34,11 @@ class DocumentClassifier:
             DocumentClassification: The classification result for the document.
         """
 
-        def _classify(doc_text):
-            prompt = CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc_text)
-            classifier_llm = self.llm.with_structured_output(DocumentClassification)
-            return classifier_llm.invoke(prompt)
+        prompt = CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc_text)
+        classifier_llm = self.llm.with_structured_output(DocumentClassification)
+        return classifier_llm.invoke(prompt)
 
-        return with_retries(_classify, doc_text)
-
+    @retry_on_rate_limit()
     def classify_documents(self, doc_texts: list[str]) -> List[DocumentClassification]:
         """
         Classify a batch of documents and return their classifications.
@@ -51,9 +50,6 @@ class DocumentClassifier:
             list[DocumentClassification]: A list of classification results for each document.
         """
 
-        def _classify_batch(doc_texts):
-            classifier_llm = self.llm.with_structured_output(DocumentClassification)
-            prompts = [CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc) for doc in doc_texts]
-            return list(classifier_llm.batch(prompts))
-
-        return with_retries(_classify_batch, doc_texts)
+        classifier_llm = self.llm.with_structured_output(DocumentClassification)
+        prompts = [CLASSIFY_PROMPT_TEMPLATE.format(doc_text=doc) for doc in doc_texts]
+        return list(classifier_llm.batch(prompts))

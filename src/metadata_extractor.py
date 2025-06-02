@@ -1,6 +1,6 @@
 from typing import Union
 
-from llm_utils import with_retries, get_azure_chat_openai_llm
+from llm_utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.metadata_models.contract import ContractMetadata
 from models.metadata_models.earnings_report import EarningsReportMetadata
 from models.metadata_models.invoice import InvoiceMetadata
@@ -25,6 +25,7 @@ class MetadataExtractor:
             "earnings_report": (EarningsReportMetadata, EARNINGS_REPORT_PROMPT),
         }
 
+    @retry_on_rate_limit()
     def extract(self, doc_type: str, doc_text: str) -> Union[
         InvoiceMetadata, ContractMetadata, EarningsReportMetadata, dict]:
         """
@@ -38,16 +39,9 @@ class MetadataExtractor:
             Any: The extracted metadata object, or an empty dict if extraction fails or type is unsupported.
         """
 
-        def _extract_metadata(doc_type, doc_text):
-            schema, prompt_template = self.schemas.get(doc_type, (None, None))
-            if not schema:
-                return {}
-            structured_llm = self.llm.with_structured_output(schema)
-            prompt = prompt_template.format(doc_text=doc_text)
-            return structured_llm.invoke(prompt)
-
-        try:
-            return with_retries(_extract_metadata, doc_type, doc_text)
-        except Exception as e:
-            print(f"Extraction failed: {e}")
+        schema, prompt_template = self.schemas.get(doc_type, (None, None))
+        if not schema:
             return {}
+        structured_llm = self.llm.with_structured_output(schema)
+        prompt = prompt_template.format(doc_text=doc_text)
+        return structured_llm.invoke(prompt)
