@@ -21,7 +21,7 @@ def prepare_docs():
     doc_texts = []
     doc_labels = []
     for filename, label in expected_types.items():
-        file_path = os.path.join("data", filename)
+        file_path = os.path.join("data", "factify", filename)
         ingestor = DocumentIngestor(file_path)
         doc_texts.append(ingestor.get_full_text())
         doc_labels.append(label)
@@ -64,7 +64,7 @@ def test_metrics_per_class(target_class, n_runs):
 
     doc_texts = []
     for filename in doc_files:
-        file_path = os.path.join("data", filename)
+        file_path = os.path.join("data", "factify", filename)
         ingestor = DocumentIngestor(file_path)
         doc_texts.append(ingestor.get_full_text())
 
@@ -88,7 +88,7 @@ def test_metrics_per_class(target_class, n_runs):
 
 @pytest.mark.parametrize("filename,expected_type", expected_types.items())
 def test_document_classification_simple_case(filename, expected_type):
-    file_path = os.path.join("data", filename)
+    file_path = os.path.join("data", "factify", filename)
     ingestor = DocumentIngestor(file_path)
     doc_text = ingestor.get_full_text()
 
