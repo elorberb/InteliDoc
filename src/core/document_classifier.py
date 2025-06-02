@@ -2,9 +2,9 @@ from typing import List
 
 from dotenv import load_dotenv
 
-from llm_utils import get_azure_chat_openai_llm, retry_on_rate_limit
+from llm.utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.document_classification import DocumentClassification
-from prompts import CLASSIFY_PROMPT_TEMPLATE
+from llm.prompts import CLASSIFY_PROMPT_TEMPLATE
 
 load_dotenv()
 

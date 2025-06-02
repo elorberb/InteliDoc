@@ -2,11 +2,10 @@ import os
 import uuid
 from pathlib import Path
 
-from document_classifier import DocumentClassifier
-from document_ingestor import DocumentIngestor
-from llm_utils import get_azure_chat_openai_llm
-from metadata_extractor import MetadataExtractor
-from models.analyze_response import AnalyzeResponse
+from core.document_classifier import DocumentClassifier
+from core.document_ingestor import DocumentIngestor
+from llm.utils import get_azure_chat_openai_llm
+from core.metadata_extractor import MetadataExtractor
 
 
 def run_pipeline(document_path: str) -> dict:

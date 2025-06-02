@@ -1,10 +1,10 @@
 from typing import Union
 
-from llm_utils import get_azure_chat_openai_llm, retry_on_rate_limit
+from llm.utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.metadata_models.contract import ContractMetadata
 from models.metadata_models.earnings_report import EarningsReportMetadata
 from models.metadata_models.invoice import InvoiceMetadata
-from prompts import INVOICE_PROMPT, CONTRACT_PROMPT, EARNINGS_REPORT_PROMPT
+from llm.prompts import INVOICE_PROMPT, CONTRACT_PROMPT, EARNINGS_REPORT_PROMPT
 
 
 class MetadataExtractor:

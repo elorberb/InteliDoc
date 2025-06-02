@@ -3,10 +3,10 @@ from typing import Dict, Optional, Any
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 
-from document_classifier import DocumentClassifier
-from document_ingestor import DocumentIngestor
-from llm_utils import get_azure_chat_openai_llm
-from metadata_extractor import MetadataExtractor
+from core.document_classifier import DocumentClassifier
+from core.document_ingestor import DocumentIngestor
+from llm.utils import get_azure_chat_openai_llm
+from core.metadata_extractor import MetadataExtractor
 from models.analyze_response import AnalyzeResponse
 
 app = FastAPI(title="📑 InteliDoc: Intelligence Document API")
