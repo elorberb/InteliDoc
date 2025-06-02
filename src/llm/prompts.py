@@ -104,6 +104,7 @@ IMPORTANT GUIDELINES:
    - Debt-to-Equity Ratio
    - Year-over-Year (YoY) growth figures
    - Industry-specific KPIs (e.g., ARR, MRR, DAU/MAU for tech companies)
+   - IMPORTANT: The keys in the key_metrics dictionary MUST be consistent, use only lowercase letters and underscores (snake_case), e.g., "net_income", "operating_margin", "free_cash_flow".
 
 5. EXECUTIVE SUMMARY: Include only factual information from the document covering:
    - Overall financial performance compared to previous periods
@@ -113,7 +114,7 @@ IMPORTANT GUIDELINES:
    - CEO/management comments on performance
    - Do not include speculative analysis or information not present in the document
 
-Return ONLY a JSON matching the expected schema.
+Return ONLY a JSON matching the expected schema. All key_metrics keys must be in snake_case (lowercase with underscores).
 Document:
 \"\"\"{doc_text}\"\"\"
 """
