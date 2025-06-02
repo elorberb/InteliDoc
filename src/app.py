@@ -5,13 +5,18 @@ from fastapi import FastAPI, UploadFile, File, HTTPException, Query
 
 from document_classifier import DocumentClassifier
 from document_ingestor import DocumentIngestor
+from llm_utils import get_azure_chat_openai_llm
 from metadata_extractor import MetadataExtractor
 from models.analyze_response import AnalyzeResponse
-from models.document_classification import DocumentClassification
 
 app = FastAPI(title="📑 InteliDoc: Document Intelligence API")
 # In-memory storage
 DOCUMENT_STORE: Dict[str, dict] = {}
+
+# Initialize shared components at app startup
+llm = get_azure_chat_openai_llm()
+classifier = DocumentClassifier(llm)
+extractor = MetadataExtractor(llm)
 
 
 def _get_field_descriptions(doc_type: str) -> Dict[str, str]:
@@ -53,10 +58,7 @@ async def analyze_document(file: UploadFile = File(...)):
         ingestor = DocumentIngestor(temp_path)
         full_text = ingestor.get_full_text()
 
-        classifier = DocumentClassifier()
-        classification: DocumentClassification = classifier.classify_document(full_text)
-
-        extractor = MetadataExtractor()
+        classification = classifier.classify_document(full_text)
         metadata_obj = extractor.extract(classification.type.value, full_text)
 
         # Store original objects, not flattened values

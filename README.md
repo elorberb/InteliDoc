@@ -38,7 +38,7 @@ export PYTHONPATH=$PYTHONPATH:$(pwd)/src  # On Windows use `set PYTHONPATH=%cd%\
 
 Then, start the FastAPI server using `uvicorn`:
 ```bash
-uvicorn src.api:app --reload
+uvicorn src.app:app --reload
 ```
 
 Access the API at: http://localhost:8000/docs to test app endpoints in Swagger UI.
