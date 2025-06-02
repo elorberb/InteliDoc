@@ -1,3 +1,16 @@
+# 📑 InteliDoc – Intelligent Document Understanding API
+
+InteliDoc is a modular AI-powered system that turns unstructured business documents (like invoices, contracts, and earnings reports) into structured, machine-readable metadata using  LLMs (like GPT-4o via Azure) for classification and semantic extraction.
+
+This repository includes:
+- A FastAPI backend to serve and expose the AI system.
+- Modular pipelines for ingestion, classification, and metadata extraction.
+- Prompt engineering and structured output design for LLMs.
+
+---
+
+
+
 ## 📦 Setup Instructions
 
 ### 1. Clone the Repository
