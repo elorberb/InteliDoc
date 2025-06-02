@@ -47,7 +47,8 @@ def run_pipeline(document_path: str) -> dict:
 
     print(f"Saved results to {output_filename}")
     print("Extracted Metadata:")
-    metadata.pretty_print()
+    if hasattr(metadata, "pretty_print"):
+        metadata.pretty_print()
 
     return result
 
