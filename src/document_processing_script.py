@@ -4,8 +4,8 @@ from pathlib import Path
 
 from core.document_classifier import DocumentClassifier
 from core.document_ingestor import DocumentIngestor
-from llm.utils import get_azure_chat_openai_llm
 from core.metadata_extractor import MetadataExtractor
+from llm.utils import get_azure_chat_openai_llm
 
 
 def run_pipeline(document_path: str) -> dict:
@@ -33,7 +33,7 @@ def run_pipeline(document_path: str) -> dict:
         "document_id": doc_id,
         "filename": filename,
         "classification": classification.model_dump(),
-        "metadata": metadata.model_dump()
+        "metadata": metadata.model_dump() if hasattr(metadata, "model_dump") else metadata,
     }
 
     # Save to file in output subfolder matching input folder

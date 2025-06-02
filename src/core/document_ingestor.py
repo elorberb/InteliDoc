@@ -41,11 +41,3 @@ class DocumentIngestor:
         return "\n".join(
             f"--- Page {i + 1} ---\n{page}" for i, page in enumerate(self.text)
         )
-
-
-if __name__ == '__main__':
-    # test the test extraction
-    ingestor = DocumentIngestor("data/invoice2.pdf")
-    print("Extracted Text:")
-    for i, page in enumerate(ingestor.text):
-        print(f"Page {i + 1}:\n{page}\n")

@@ -1,12 +1,8 @@
 from typing import List
 
-from dotenv import load_dotenv
-
+from llm.prompts import CLASSIFY_PROMPT_TEMPLATE
 from llm.utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.document_classification import DocumentClassification
-from llm.prompts import CLASSIFY_PROMPT_TEMPLATE
-
-load_dotenv()
 
 
 class DocumentClassifier:
