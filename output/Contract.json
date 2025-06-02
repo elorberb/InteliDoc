@@ -1,0 +1,23 @@
+{
+  "document_id": "70867538-8410-4b5b-a82f-aeaea8f6b7e5",
+  "filename": "Contract.pdf",
+  "classification": {
+    "type": "contract",
+    "confidence": 0.95
+  },
+  "metadata": {
+    "parties": [
+      "Emerald Health Naturals, Inc.",
+      "Dr. Gaetano Morello N.D. Inc."
+    ],
+    "effective_date": "2019-01-10",
+    "termination_date": "2021-01-10",
+    "key_terms": [
+      "Payment of an annual fee of $240,000 plus applicable taxes to the Contractor.",
+      "Confidentiality obligations for a period of five years post-termination.",
+      "Termination rights for both parties with specified notice periods.",
+      "Governing law is British Columbia, Canada.",
+      "Independent contractor relationship, not employment."
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "document_id": "726af7ac-d73d-477f-b53b-3d639d728ece",
+  "filename": "invoice2.pdf",
+  "classification": {
+    "type": "invoice",
+    "confidence": 0.95
+  },
+  "metadata": {
+    "vendor": "Hotel Amarin",
+    "amount": 9390.26,
+    "due_date": "2021-09-03",
+    "line_items": [
+      {
+        "description": "Daily rental price & full board-premium",
+        "qty": 2,
+        "unit_price": 4624.63,
+        "total": 9249.26
+      },
+      {
+        "description": "Welcome bar Hotel Amarin",
+        "qty": 1,
+        "unit_price": 90.0,
+        "total": 90.0
+      },
+      {
+        "description": "Istrian beach house II",
+        "qty": 2,
+        "unit_price": 51.0,
+        "total": 102.0
+      }
+    ]
+  }
+}

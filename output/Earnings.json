@@ -1,0 +1,34 @@
+{
+  "document_id": "1ea5d484-784a-43bf-888d-e6f5c93755ae",
+  "filename": "Earnings.pdf",
+  "classification": {
+    "type": "earnings_report",
+    "confidence": 0.95
+  },
+  "metadata": {
+    "reporting_period": "Q1 2025",
+    "key_metrics": [
+      {
+        "name": "Revenues",
+        "value": 90234.0
+      },
+      {
+        "name": "Net Income",
+        "value": 34540.0
+      },
+      {
+        "name": "Diluted EPS",
+        "value": 2.81
+      },
+      {
+        "name": "Income from operations",
+        "value": 30606.0
+      },
+      {
+        "name": "Other income (expense), net",
+        "value": 11183.0
+      }
+    ],
+    "executive_summary": "For Q1 2025, Alphabet reported revenues of $90.234 billion, a 12% year-over-year increase. Net income reached $34.540 billion, reflecting a 46% growth compared to Q1 2024. Diluted EPS was $2.81, up 49% from the previous year. The company achieved an income from operations of $30.606 billion, a 20% increase year-over-year. Other income (expense), net, significantly rose to $11.183 billion, marking a 293% increase. These results highlight Alphabet's strong financial performance and operational efficiency during the quarter."
+  }
+}
