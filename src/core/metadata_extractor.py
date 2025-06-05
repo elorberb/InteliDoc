@@ -1,10 +1,16 @@
 from typing import Union
 
-from llm.prompts import INVOICE_PROMPT, CONTRACT_PROMPT, EARNINGS_REPORT_PROMPT
+from llm.prompts import (
+    INVOICE_PROMPT,
+    CONTRACT_PROMPT,
+    EARNINGS_REPORT_PROMPT,
+    PURCHASE_ORDER_PROMPT,
+)
 from llm.utils import get_azure_chat_openai_llm, retry_on_rate_limit
 from models.metadata_models.contract import ContractMetadata
 from models.metadata_models.earnings_report import EarningsReportMetadata
 from models.metadata_models.invoice import InvoiceMetadata
+from models.metadata_models.purchase_order import PurchaseOrderMetadata
 
 
 class MetadataExtractor:
@@ -19,17 +25,23 @@ class MetadataExtractor:
             self.llm = get_azure_chat_openai_llm()
         else:
             self.llm = llm
-
         self.schemas = {
             "invoice": (InvoiceMetadata, INVOICE_PROMPT),
             "contract": (ContractMetadata, CONTRACT_PROMPT),
             "earnings_report": (EarningsReportMetadata, EARNINGS_REPORT_PROMPT),
+            "purchase_order": (PurchaseOrderMetadata, PURCHASE_ORDER_PROMPT),
         }
 
     @retry_on_rate_limit()
     def extract(
             self, doc_type: str, doc_text: str
-    ) -> Union[InvoiceMetadata, ContractMetadata, EarningsReportMetadata, dict]:
+    ) -> Union[
+        InvoiceMetadata,
+        ContractMetadata,
+        EarningsReportMetadata,
+        PurchaseOrderMetadata,
+        dict,
+    ]:
         """
         Extract structured metadata from a document based on its type.
 
