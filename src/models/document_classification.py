@@ -7,12 +7,15 @@ class DocumentType(str, Enum):
     invoice = "invoice"
     contract = "contract"
     earnings_report = "earnings_report"
+    purchase_order = "purchase_order"
     unknown = "unknown"
 
 
 class DocumentClassification(BaseModel):
     type: DocumentType = Field(
         ...,
-        description="Document type: invoice, contract, earnings_report, or unknown"
+        description=(
+            "Document type: invoice, contract, earnings_report, purchase_order, or unknown"
+        ),
     )
     confidence: float = Field(..., description="Confidence score between 0 and 1")

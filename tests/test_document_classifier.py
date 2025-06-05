@@ -1,8 +1,11 @@
 import os
 import random
 
+import sys
 import pytest
 from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+sys.path.append('src')
 
 from core.document_classifier import DocumentClassifier
 from core.document_ingestor import DocumentIngestor

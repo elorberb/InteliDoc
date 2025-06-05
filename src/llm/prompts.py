@@ -1,5 +1,5 @@
-CLASSIFY_PROMPT_TEMPLATE = """You are a document classifier for business documents. The possible document types are: 
-"invoice", "contract", or "earnings_report".
+CLASSIFY_PROMPT_TEMPLATE = """You are a document classifier for business documents. The possible document types are:
+"invoice", "contract", "earnings_report", or "purchase_order".
 
 You will be provided with the text from one of the following business documents:
 - invoice: A typical business invoice (there are 2 such files)
@@ -8,7 +8,7 @@ You will be provided with the text from one of the following business documents:
 
 Given the following document text, classify it and respond only with a valid JSON object matching this schema:
 {{
-  "type": "...",         // one of: "invoice", "contract", "earnings_report", "unknown"
+  "type": "...",         // one of: "invoice", "contract", "earnings_report", "purchase_order", "unknown"
   "confidence": ...      // number between 0 and 1
 }}
 
@@ -116,6 +116,26 @@ IMPORTANT GUIDELINES:
    - Do not include speculative analysis or information not present in the document
 
 Return ONLY a JSON matching the expected schema. All key_metrics keys must be in snake_case (lowercase with underscores).
+Document:
+\"\"\"{doc_text}\"\"\"
+"""
+
+
+PURCHASE_ORDER_PROMPT = """
+You are a purchase order document understanding assistant. Extract the following metadata from the purchase order text below:
+- po_number
+- po_date
+- buyer_name
+- vendor_name
+- currency
+- payment_terms
+- line_items: each with item_number, description, quantity, unit_price, total_price, uom
+- subtotal
+- tax_amount
+- shipping_fee
+- grand_total
+
+Return ONLY a JSON matching the expected schema.
 Document:
 \"\"\"{doc_text}\"\"\"
 """
